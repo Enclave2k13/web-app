@@ -282,3 +282,7 @@
         gap: 30px;
     }
 }
+
+.gx-90 {
+    --bs-gutter-x: 90px;
+}

@@ -16,7 +16,7 @@
                 <div class="p-3">
                     <div class="d-flex align-items-center mb-3">
                         <div class="logo-box me-2">В</div>
-                        <span class="fw-bold">Logo</span>
+                        <span class="fw-bold">Меню</span>
                     </div>
                     <hr>
                     <nav class="nav flex-column mt-3">
@@ -61,18 +61,17 @@
                         <p class="sub-header">Свяжитесь с нами</p>
                     </div>
 
-                    <div class="row justify-content-center">
+                    <div class="row gx-90">
+                        <!-- форма -->
                         <div class="col-md-6">
                             <div class="card-custom p-4">
-                                <h3 class="text-center mb-4">Напишите нам</h3>
-
-                                <form method="POST" action="/contacts.html">
+                                <form method="POST" action="/contacts">
                                     <div class="mb-3">
                                         <label class="form-label">Имя</label>
                                         <input type="text" name="name" class="form-control" required>
                                     </div>
                                     <div class="mb-3">
-                                        <label class="form-label">Email</label>
+                                        <label class="form-label">Почта</label>
                                         <input type="email" name="email" class="form-control" required>
                                     </div>
                                     <div class="mb-3">
@@ -81,6 +80,19 @@
                                     </div>
                                     <button type="submit" class="btn-outline-custom">Отправить</button>
                                 </form>
+                            </div>
+                        </div>
+
+                        <!-- текст -->
+                        <div class="col-md-6">
+                            <div class="pe-3">
+                                <h3 class="mb-4">Наши контакты</h3>
+                                <p class="text-muted" style="line-height: 1.6;">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                </p>
+                                <p class="text-muted small mt-3">
+                                    While these feedback styles cannot be styled with CSS, you can still customize the feedback text through JavaScript.
+                                </p>
                             </div>
                         </div>
                     </div>
