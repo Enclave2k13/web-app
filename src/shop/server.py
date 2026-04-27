@@ -7,6 +7,14 @@ import urllib.parse
 PACKAGE_DIR = Path(__file__).parent
 TEMPLATES_DIR = PACKAGE_DIR / 'templates'
 
+templates_map = {
+    "/": "index.html",
+    "/index": "index.html",
+    "/catalog": "catalog.html",
+    "/category": "category.html",
+    "/contacts": "contacts.html",
+}
+
 
 class MyServer(BaseHTTPRequestHandler):
 
@@ -23,14 +31,8 @@ class MyServer(BaseHTTPRequestHandler):
             self.serve_static(path[1:], 'application/javascript')
             return
 
-        if path == "/" or path == "/index":
-            self.serve_template('index.html')
-        elif path == "/catalog":
-            self.serve_template('catalog.html')
-        elif path == "/category":
-            self.serve_template('category.html')
-        elif path == "/contacts":
-            self.serve_template('contacts.html')
+        if template := templates_map.get(path):
+            self.serve_template(template)
         else:
             self.send_404()
 
@@ -49,32 +51,41 @@ class MyServer(BaseHTTPRequestHandler):
     def serve_template(self, template_name):
         template_path = TEMPLATES_DIR / template_name
         try:
-            with open(template_path, 'r', encoding='utf-8') as f:
-                content = f.read()
-            self.send_response(200)
-            self.send_header("Content-type", "text/html; charset=utf-8")
-            self.end_headers()
-            self.wfile.write(bytes(content, "utf-8"))
+            content = template_path.read_text(encoding='utf-8')
         except FileNotFoundError:
             self.send_404()
+            return
+
+        self.send_response(200)
+        self.send_header("Content-type", "text/html; charset=utf-8")
+        self.end_headers()
+        self.wfile.write(content.encode('utf-8'))
 
     def serve_static(self, file_path, content_type):
         full_path = PACKAGE_DIR / 'static' / file_path
         try:
-            with open(full_path, 'r', encoding='utf-8') as f:
-                content = f.read()
-            self.send_response(200)
-            self.send_header("Content-type", f"{content_type}; charset=utf-8")
-            self.end_headers()
-            self.wfile.write(bytes(content, "utf-8"))
+            content = full_path.read_text(encoding='utf-8')
         except FileNotFoundError:
             self.send_404()
+            return
+
+        self.send_response(200)
+        self.send_header("Content-type", f"{content_type}; charset=utf-8")
+        self.end_headers()
+        self.wfile.write(content.encode('utf-8'))
 
     def send_404(self):
+        not_found_path = TEMPLATES_DIR / '404.html'
+
+        try:
+            content = not_found_path.read_text(encoding='utf-8')
+        except FileNotFoundError:
+            content = "<h1>404 - Страница не найдена</h1>"
+
         self.send_response(404)
         self.send_header("Content-type", "text/html; charset=utf-8")
         self.end_headers()
-        self.wfile.write(bytes("<h1>404 - Страница не найдена</h1>", "utf-8"))
+        self.wfile.write(content.encode('utf-8'))
 
 
 def run_server(host="localhost", port=8080):
