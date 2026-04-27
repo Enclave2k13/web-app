@@ -1,0 +1,104 @@
+"""HTTP сервер для обработки запросов."""
+
+from http.server import BaseHTTPRequestHandler, HTTPServer
+from pathlib import Path
+import urllib.parse
+
+PACKAGE_DIR = Path(__file__).parent
+TEMPLATES_DIR = PACKAGE_DIR / 'templates'
+
+templates_map = {
+    "/": "index.html",
+    "/index": "index.html",
+    "/catalog": "catalog.html",
+    "/category": "category.html",
+    "/contacts": "contacts.html",
+}
+
+
+class MyServer(BaseHTTPRequestHandler):
+
+    def do_GET(self):
+        path = urllib.parse.urlparse(self.path).path
+
+        if path.endswith('.html'):
+            path = path[:-5]
+
+        if path.startswith('/css/'):
+            self.serve_static(path[1:], 'text/css')
+            return
+        if path.startswith('/js/'):
+            self.serve_static(path[1:], 'application/javascript')
+            return
+
+        if template := templates_map.get(path):
+            self.serve_template(template)
+        else:
+            self.send_404()
+
+    def do_POST(self):
+        content_length = int(self.headers.get('Content-Length', 0))
+        post_data = self.rfile.read(content_length).decode('utf-8')
+
+        print("\n" + "=" * 50)
+        print("ПОЛУЧЕН POST-ЗАПРОС")
+        print(f"Путь: {self.path}")
+        print(f"Данные: {post_data}")
+        print("=" * 50 + "\n")
+
+        self.serve_template('contacts.html')
+
+    def serve_template(self, template_name):
+        template_path = TEMPLATES_DIR / template_name
+        try:
+            content = template_path.read_text(encoding='utf-8')
+        except FileNotFoundError:
+            self.send_404()
+            return
+
+        self.send_response(200)
+        self.send_header("Content-type", "text/html; charset=utf-8")
+        self.end_headers()
+        self.wfile.write(content.encode('utf-8'))
+
+    def serve_static(self, file_path, content_type):
+        full_path = PACKAGE_DIR / 'static' / file_path
+        try:
+            content = full_path.read_text(encoding='utf-8')
+        except FileNotFoundError:
+            self.send_404()
+            return
+
+        self.send_response(200)
+        self.send_header("Content-type", f"{content_type}; charset=utf-8")
+        self.end_headers()
+        self.wfile.write(content.encode('utf-8'))
+
+    def send_404(self):
+        not_found_path = TEMPLATES_DIR / '404.html'
+
+        try:
+            content = not_found_path.read_text(encoding='utf-8')
+        except FileNotFoundError:
+            content = "<h1>404 - Страница не найдена</h1>"
+
+        self.send_response(404)
+        self.send_header("Content-type", "text/html; charset=utf-8")
+        self.end_headers()
+        self.wfile.write(content.encode('utf-8'))
+
+
+def run_server(host="localhost", port=8080):
+    server = HTTPServer((host, port), MyServer)
+    print(f"Сервер запущен: http://{host}:{port}")
+    print("Нажми Ctrl+C для остановки\n")
+    try:
+        server.serve_forever()
+    except KeyboardInterrupt:
+        print("\nОстанавливаем сервер...")
+    server.server_close()
+    print("Сервер остановлен")
+
+
+if __name__ == "__main__":
+    run_server()

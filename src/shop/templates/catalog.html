@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог - Магазин</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container-fluid p-0">
+        <div class="row g-0">
+            <!-- САЙДБАР -->
+            <div class="col-auto sidebar" style="width: 280px;">
+                <div class="p-3">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="logo-box me-2">В</div>
+                        <span class="fw-bold">Меню</span>
+                    </div>
+                    <hr>
+
+                    <nav class="nav flex-column mt-3">
+                        <a class="nav-link py-2 px-3" href="/">
+                            <i class="bi bi-house-door me-2"></i> Главная
+                        </a>
+                        <a class="nav-link py-2 px-3 active" href="/catalog">
+                             <i class="bi bi-grid-3x3-gap me-2"></i>Каталог</a>
+                        <a class="nav-link py-2 px-3" href="/category">
+                            <i class="bi bi-speedometer2 me-2"></i> Категория
+                        </a>
+                        <a class="nav-link py-2 px-3" href="#">
+                            <i class="bi bi-calendar me-2"></i> Заказы
+                        </a>
+                        <a class="nav-link py-2 px-3" href="/contacts">
+                            <i class="bi bi-person-circle me-2"></i> Контакты
+                        </a>
+                    </nav>
+                </div>
+
+                <div class="sidebar-bottom">
+                    <div class="dropdown-menu-custom hidden-menu" id="dropdownMenu">
+                        <a href="#" class="dropdown-item-custom">Профиль</a>
+                        <a href="#" class="dropdown-item-custom">Выход</a>
+                    </div>
+
+                    <hr>
+                    <div class="user-info">
+                        <div class="d-flex align-items-center">
+                            <div class="avatar-img me-2"></div>
+                            <span>Пользователь</span>
+                        </div>
+                        <i class="bi bi-chevron-down" id="dropdownArrow" style="cursor: pointer;"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ОСНОВНОЙ КОНТЕНТ -->
+            <div class="col main-content">
+                <div class="container">
+                    <div class="text-center page-title">
+                        <h1 class="display-4 fw-bold">Каталог</h1>
+                        <p class="sub-header">Выберите товар из нашего каталога</p>
+                    </div>
+
+                    <div class="catalog-grid">
+                        <!-- Карточка 1 -->
+                        <div class="catalog-card">
+                            <div class="card-thumbnail">
+                                Thumbnail
+                            </div>
+                            <div class="card-body-custom">
+                                <p class="card-text">
+                                    This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+                                </p>
+                                <div class="card-footer-custom">
+                                    <div class="btn-group">
+                                        <button class="btn-outline-sm">View</button>
+                                        <button class="btn-outline-sm">Edit</button>
+                                    </div>
+                                    <span class="text-muted small">9 mins</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Карточка 2 -->
+                        <div class="catalog-card">
+                            <div class="card-thumbnail">
+                                Thumbnail
+                            </div>
+                            <div class="card-body-custom">
+                                <p class="card-text">
+                                    This is a wider card with supporting text below as natural lead-in to additional content. This content is a little bit longer.
+                                </p>
+                                <div class="card-footer-custom">
+                                    <div class="btn-group">
+                                        <button class="btn-outline-sm">View</button>
+                                        <button class="btn-outline-sm">Edit</button>
+                                    </div>
+                                    <span class="text-muted small">9 mins</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Карточка 3 -->
+                        <div class="catalog-card">
+                            <div class="card-thumbnail">
+                                Thumbnail
+                            </div>
+                            <div class="card-body-custom">
+                                <p class="card-text">
+                                    This is a wider card with supporting text below as natural lead-in to additional content. This content is a little bit longer.
+                                </p>
+                                <div class="card-footer-custom">
+                                    <div class="btn-group">
+                                        <button class="btn-outline-sm">View</button>
+                                        <button class="btn-outline-sm">Edit</button>
+                                    </div>
+                                    <span class="text-muted small">9 mins</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Карточка 4 -->
+                        <div class="catalog-card">
+                            <div class="card-thumbnail">
+                                Thumbnail
+                            </div>
+                            <div class="card-body-custom">
+                                <p class="card-text">
+                                    This is a wider card with supporting text below as natural lead-in to additional content. This content is a little bit longer.
+                                </p>
+                                <div class="card-footer-custom">
+                                    <div class="btn-group">
+                                        <button class="btn-outline-sm">View</button>
+                                        <button class="btn-outline-sm">Edit</button>
+                                    </div>
+                                    <span class="text-muted small">9 mins</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
